@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10.11.2014 21:53:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.master.roleup.model.TLanguages" table="t_languages" schema="public" optimistic-lock="version">
+        <id name="id" type="integer">
+            <column name="id" precision="131089" scale="0" />
+            <generator class="sequence" />
+        </id>
+        <property name="vname" type="string">
+            <column name="vname" />
+        </property>
+        <set name="TGameses" table="t_games" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nlanguageid" precision="131089" scale="0" />
+            </key>
+            <one-to-many class="com.master.roleup.model.TGames" />
+        </set>
+    </class>
+</hibernate-mapping>

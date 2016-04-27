@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10.11.2014 21:53:42 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.master.roleup.model.TGames" table="t_games" schema="public" optimistic-lock="version">
+        <id name="id" type="integer">
+            <column name="id" precision="131089" scale="0" />
+            <generator class="sequence" />
+        </id>
+        <many-to-one name="TLanguages" class="com.master.roleup.model.TLanguages" fetch="select">
+            <column name="nlanguageid" precision="131089" scale="0" />
+        </many-to-one>
+        <many-to-one name="TUsers" class="com.master.roleup.model.TUsers" fetch="select">
+            <column name="nuserid" precision="131089" scale="0" />
+        </many-to-one>
+        <property name="vtitle" type="string">
+            <column name="vtitle" />
+        </property>
+        <property name="dcreatedate" type="timestamp">
+            <column name="dcreatedate" length="29" sql-type="timestamp" />
+            
+        </property>
+        <property name="vstatus" type="string">
+            <column name="vstatus" />
+        </property>
+        <property name="nrate" type="integer">
+            <column name="nrate" precision="131089" scale="0" />
+        </property>
+        <property name="nviewcount" type="integer">
+            <column name="nviewcount" precision="131089" scale="0" />
+        </property>
+        <property name="vimagepath" type="string">
+            <column name="vimagepath" />
+        </property>
+        <set name="TBlockses" table="t_blocks" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ngameid" precision="131089" scale="0" />
+            </key>
+            <one-to-many class="com.master.roleup.model.TBlocks" />
+        </set>
+    </class>
+</hibernate-mapping>

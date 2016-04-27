@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="loginForm">
+
+    <var name="user" class="com.mycompany.flowtestingproject.objects.User" />
+    <var name="answer" class="com.mycompany.flowtestingproject.objects.Answer" />
+
+    <view-state id="loginForm" view="login" model="user">
+        <transition on="submit" to="actionCheckLogin" />
+    </view-state>
+    
+    
+    <action-state id="actionCheckLogin">
+        <evaluate expression="loginService.authorize(user,flowRequestContext)"/>
+        <transition on="success" to="mainContent" />
+        <transition on="failed" to="loginForm" />
+    </action-state>
+    
+    <view-state id="mainContent" view="main" >    
+        <transition on="starttest" to="actionStartTest" />
+    </view-state>
+    
+    
+    <action-state id="actionStartTest">
+        <evaluate expression="testService.startTest(user,flowRequestContext)"/>
+        <transition on="success" to="testForm" />
+        <transition on="failed" to="loginForm" />
+    </action-state>
+    
+    <view-state id="testForm" view="test" model="answer">
+        <transition on="next" to="actionNextQuestion" />
+        <transition on="previous" to="actionPreviousQuestion" />
+    </view-state>
+    
+    <action-state id="actionNextQuestion">
+        <evaluate expression="testService.goNextQuestion(user,answer,flowRequestContext)"/>
+        <transition on="next" to="testForm" />
+        <transition on="finish" to="actionEvaluateTest" />
+    </action-state>
+    
+    <action-state id="actionPreviousQuestion">
+        <evaluate expression="testService.goPreviousQuestion(user,flowRequestContext)"/>
+        <transition on="previous" to="testForm" />
+    </action-state>
+    
+    
+    <action-state id="actionEvaluateTest">
+        <evaluate expression="testService.evaluateTest(user,flowRequestContext)"/>
+        <transition on="success" to="resultsForm" />
+    </action-state>
+    
+    <view-state id="resultsForm" view="results">
+        <transition on="exit" to="actionLogout" />
+    </view-state>
+    
+    <action-state id="actionLogout">
+        <evaluate expression="loginService.logout(flowRequestContext)"/>
+        <transition on="logout" to="loginForm" />
+    </action-state>
+</flow>

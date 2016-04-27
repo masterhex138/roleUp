@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="testdb" match-schema="public"/>
+  <table-filter match-name="t_likes"/>
+  <table-filter match-name="t_blocks"/>
+  <table-filter match-name="t_genres"/>
+  <table-filter match-name="t_users"/>
+  <table-filter match-name="t_variants"/>
+  <table-filter match-name="t_games"/>
+  <table-filter match-name="t_languages"/>
+  <table-filter match-name="t_roles"/>
+</hibernate-reverse-engineering>
